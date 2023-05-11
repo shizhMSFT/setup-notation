@@ -33,12 +33,10 @@ function getDownloadURL(version) {
 async function setup() {
   try {
     // Download Notation CLI of the specified version
-    const url = core.getInput('url');
-    if (url === '') {
+    let donwloadURL = core.getInput('url');
+    if (donwloadURL === '') {
         const version = core.getInput('version');
-        const donwloadURL = getDownloadURL(version)
-    } else {
-        const donwloadURL = url
+        donwloadURL = getDownloadURL(version)
     }
     const assetPath = await tc.downloadTool(donwloadURL);
 
