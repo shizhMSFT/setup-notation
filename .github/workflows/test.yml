@@ -14,7 +14,7 @@ defaults:
 
 jobs:
   test:
-    name: Test Setup NOTATION CLI
+    name: Test Setup Notation CLI
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -26,12 +26,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Setup NOTATION v${{ matrix.version }}
+    - name: Setup Notation v${{ matrix.version }}
       uses: ./
       with:
         version: ${{ matrix.version }}
 
-    - name: Verify NOTATION version installed
+    - name: Verify Notation version installed
       env:
         NOTATION_VERSION_EXPECTED: ${{ matrix.version }}
       run: |
