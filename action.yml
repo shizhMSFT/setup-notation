@@ -7,6 +7,9 @@ inputs:
   version:
     description: Version of Notation CLI to install
     required: true
+  url:
+    description: Override URL of Notation CLI to install
+    required: false
 runs:
   using: node16
   main: dist/index.js

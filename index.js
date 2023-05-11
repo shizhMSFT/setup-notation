@@ -33,8 +33,13 @@ function getDownloadURL(version) {
 async function setup() {
   try {
     // Download Notation CLI of the specified version
-    const version = core.getInput('version');
-    const donwloadURL = getDownloadURL(version)
+    const url = core.getInput('url');
+    if (url === '') {
+        const version = core.getInput('version');
+        const donwloadURL = getDownloadURL(version)
+    } else {
+        const donwloadURL = url
+    }
     const assetPath = await tc.downloadTool(donwloadURL);
 
     // Extract the tarball/zipball onto host runner
