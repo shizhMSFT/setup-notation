@@ -1,0 +1,12 @@
+name: setup-notation
+description: Setup Notation CLI on GitHub Actions runners
+branding:
+  icon: pen-tool
+  color: gray-dark
+inputs:
+  version:
+    description: Version of Notation CLI to install
+    required: true
+runs:
+  using: node16
+  main: dist/index.js

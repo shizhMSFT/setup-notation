@@ -1,0 +1,42 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    name: Test Setup NOTATION CLI
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+        version:
+          - 1.0.0-rc.4
+      fail-fast: true
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup NOTATION v${{ matrix.version }}
+      uses: ./
+      with:
+        version: ${{ matrix.version }}
+
+    - name: Verify NOTATION version installed
+      env:
+        NOTATION_VERSION_EXPECTED: ${{ matrix.version }}
+      run: |
+        echo ---
+        notation version
+        echo ---
+        read -ra NOTATION_VERSION_INSTALLED <<<$(notation version | grep Version:)
+        [ "${NOTATION_VERSION_INSTALLED[1]}" == "$NOTATION_VERSION_EXPECTED" ]
